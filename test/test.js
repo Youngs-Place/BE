@@ -1,7 +1,13 @@
-const assert = require('assert');
+const express = require('express');
+const app = express();
 
-describe('Simple Test', function() {
-  it('should return true for 1 + 1 equals 2', function() {
-    assert.strictEqual(1 + 1, 2);
-  });
+const PORT = 3000;
+
+// 헬스 체크 엔드포인트 추가
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
