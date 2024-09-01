@@ -31,4 +31,4 @@ jobs:
       run: npx mocha
 
     - name: Start server
-      run: npm start
+      run: npm start &
