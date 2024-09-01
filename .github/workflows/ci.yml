@@ -24,21 +24,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Start server and wait for readiness
-      run: |
-        npm start &
-        SERVER_PID=$!
-        
-        echo "Waiting for server to start..."
-        for i in {1..30}; do
-          if curl -s http://localhost:3000/health | grep -q 'OK'; then
-            echo "Server is ready."
-            break
-          fi
-          echo "Server not ready yet. Retrying..."
-          sleep 2
-        done
-        
-        npx mocha || { echo "Tests failed"; kill $SERVER_PID; exit 1; }
-        
-        kill $SERVER_PID
+    - name: Run tests
+      run: npm test
+
+    - name: Start server
+      run: npm start &
