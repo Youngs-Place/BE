@@ -24,11 +24,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Grant execute permissions for Mocha
-      run: chmod +x ./node_modules/.bin/mocha
-
-    - name: Run tests
-      run: npx mocha
-
-    - name: Start server
-      run: npm start &
+    - name: Start server and run tests
+      run: |
+        npm start &
+        SERVER_PID=$!
+        # Wait for the server to start
+        sleep 10
+        npm test
+        kill $SERVER_PID
