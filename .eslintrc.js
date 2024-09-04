@@ -1,25 +1,14 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: 'tsconfig.json',
-    tsconfigRootDir: __dirname,
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  root: true,
   env: {
-    node: true,
-    jest: true,
+    node: true, // Node.js 환경을 설정
+    es6: true, // ES6+ 기능을 사용할 수 있게 설정
   },
-  ignorePatterns: ['.eslintrc.js'],
+  parser: '@typescript-eslint/parser',
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    'prettier/prettier': 'error',
+    '@typescript-eslint/no-require-imports': 'off', // require 사용 허용
   },
+  ignorePatterns: ['dist/'], // dist 폴더 무시
 };
